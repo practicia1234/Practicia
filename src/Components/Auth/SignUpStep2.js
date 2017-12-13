@@ -4,75 +4,85 @@ import {
   View,
   TextInput
 } from 'react-native';
-import { Button } from '../Common';
-
+import Section from '../Helpers/Section';
+import Button from '../Helpers/Button';
 
 class SignUpStep2 extends Component {
-
-  onButtonPress() {
-
-    }
+  state = { text: '' };
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.headingText}> Sign up: Teacher [Step-2]</Text>
-        <View style={styles.formView}>
+      <View style={styles.contaoner}>
+        <Text style={styles.headerText}> Teacher </Text>
+        <Section>
           <TextInput
             underlineColorAndroid='transparent'
-            style={styles.TextInput}
-            placeholder="Email@email.com"
+            placeholder="email@website.com"
+            placeholderTextColor="#AAAAAA"
+            style={styles.inputStyle}
             onChangeText={(text) => this.setState({ text })}
+            value={this.state.text}
           />
+        </Section>
+        <Section>
           <TextInput
             underlineColorAndroid='transparent'
-            style={styles.TextInput}
             placeholder="Password"
+            placeholderTextColor="#AAAAAA"
+            style={styles.inputStyle}
             onChangeText={(text) => this.setState({ text })}
+            value={this.state.text}
           />
-          <Button onPress={this.onButtonPress.bind(this)}>
-            Submit
-          </Button>
-        </View>
+        </Section>
+        <Section>
+          <TextInput
+            underlineColorAndroid='transparent'
+            placeholder="First Name"
+            placeholderTextColor="#AAAAAA"
+            style={styles.inputStyle}
+            onChangeText={(text) => this.setState({ text })}
+            value={this.state.text}
+          />
+        </Section>
+        <Section>
+          <TextInput
+            underlineColorAndroid='transparent'
+            placeholder="Last Name"
+            placeholderTextColor="#AAAAAA"
+            style={styles.inputStyle}
+            onChangeText={(text) => this.setState({ text })}
+            value={this.state.text}
+          />
+        </Section>
+        <Section>
+          <Button style={styles.buttonLogin}>Submit</Button>
+        </Section>
       </View>
     );
   }
 }
 
 const styles = {
-  container: {
-    padding: 10,
-    backgroundColor: '#D2EEF7',
+  contaoner: {
+    backgroundColor: '#FFFFFF',
     borderRadius: 4,
     borderWidth: 0.5,
     borderColor: '#9DDAEE',
     flex: 1,
-    justifyContent: 'center',
-  },
-  formView: {
-    paddingTop: 10,
-    paddingBottom: 10,
-  },
-  headingText: {
-    fontSize: 23,
-    margin: 10,
     padding: 10,
-    textAlign: 'center',
-    color: '#3BAFDA',
-    borderBottomWidth: 1,
-    borderColor: '#7BCDE8',
   },
-  TextInput: {
+  inputStyle: {
     height: 50,
-    borderWidth: 1,
-    borderColor: '#fff',
-    borderRadius: 4,
+    borderColor: '#BBBBBB',
+    borderWidth: 0.7,
     fontSize: 20,
-    padding: 10,
-    backgroundColor: '#ffffff',
-    marginBottom: 20,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderRadius: 5,
   },
-  button: {
-    marginTop: 10,
+  headerText: {
+    fontSize: 30,
+    textAlign: 'center',
+    marginBottom: 70,
   },
 };
 
