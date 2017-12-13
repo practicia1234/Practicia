@@ -5,12 +5,12 @@
  */
 
 import React, { Component } from 'react';
-import Login from './Components/Auth/Login';
+import SignUpStep3 from './Components/Auth/SignUpStep3';
 
 class App extends Component<{}> {
   render() {
     return (
-      <Login />
+      <SignUpStep3 />
     );
   }
 }

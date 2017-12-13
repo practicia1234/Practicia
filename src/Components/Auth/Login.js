@@ -14,7 +14,7 @@ class Login extends Component {
     return (
       <View style={styles.container}>
           <Image
-            source={require('../../Assets/Images/logo.png')}
+            source={require('../../Assets/Images/logo.gif')}
             style={styles.logo}
           />
         <View style={styles.loginView}>
