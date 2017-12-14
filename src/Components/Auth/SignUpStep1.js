@@ -8,8 +8,13 @@ import Button from '../Helpers/Button';
 import Section from '../Helpers/Section';
 
 class SignUpStep1 extends Component {
+  static navigationOptions = {
+   header: null,
+  };
   onPressSignupAs(e) {
     console.log(e);
+    const { navigate } = this.props.navigation;
+    navigate('SignUpStep2', { userType: e.userType });
     // need to navigate to another page with this value
   }
   render() {
@@ -79,8 +84,8 @@ const styles = {
   logoContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 40,
-    marginBottom: 40,
+    marginTop: 20,
+    marginBottom: 20,
   },
   logo: {
     width: 300,
@@ -89,10 +94,10 @@ const styles = {
   signInAs: {
     fontSize: 20,
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: 10,
   },
   LoginBox: {
-    marginTop: 70,
+    marginTop: 30,
     marginLeft: 40,
     marginRight: 40,
   },

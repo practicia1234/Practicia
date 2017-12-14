@@ -8,11 +8,25 @@ import Section from '../Helpers/Section';
 import Button from '../Helpers/Button';
 
 class SignUpStep2 extends Component {
+  static navigationOptions = {
+    title: 'Sign Up [Step-2]',
+    headerTitleStyle: {
+      fontWeight: '500',
+      fontSize: 24,
+      paddingRight: 50,
+      alignSelf: 'center'
+    },
+  };
   state = { text: '' };
   render() {
+    //const { navigate } = this.props.navigation;
+    const { userType } = this.props.navigation.state.params;
+    console.log(userType);
+
+    //console.log(this.props);
     return (
       <View style={styles.contaoner}>
-        <Text style={styles.headerText}> Teacher </Text>
+        <Text style={styles.headerText}> {userType} </Text>
         <Section>
           <TextInput
             underlineColorAndroid='transparent'
@@ -82,7 +96,8 @@ const styles = {
   headerText: {
     fontSize: 30,
     textAlign: 'center',
-    marginBottom: 70,
+    marginTop: 20,
+    marginBottom: 30,
   },
 };
 
