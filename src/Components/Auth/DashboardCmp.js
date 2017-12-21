@@ -3,35 +3,18 @@ import {
   Text,
   View,
   ScrollView,
-  KeyboardAvoidingView
 } from 'react-native';
 import { connect } from 'react-redux';
-import { fieldChange, LogoutAction } from '../../actions';
-import { Section, Alert, Button } from '../Helpers';
+import { LogoutAction } from '../../actions';
+import { Section, Button } from '../Helpers';
 
 class DashboardCmp extends Component {
 
-  // Navigator information for this component
-  static navigationOptions = {
-    title: 'Dashboard',
-    headerTitleStyle: {
-      fontWeight: '500',
-      fontSize: 15,
-      paddingRight: 0,
-      alignSelf: 'center'
-    },
-  };
   componentWillReceiveProps(nextProps) {
-    // Navigate to next screen
     console.log(nextProps);
-    console.log('ddd');
-    if(nextProps.redirect =='login'){
-      console.log(nextProps);
-      const { navigate } = this.props.navigation;
-      navigate(nextProps.redirect, {});
-    }
   }
-  LogoutAction(){
+
+  LogoutAction() {
     this.props.LogoutAction(); // Action call
   }
 
@@ -68,7 +51,6 @@ const styles = {
 };
 
 const mapStateToProps = ({ auth }) => {
-  console.log(auth);
   return auth;
 };
 

@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import { NavigationActions } from 'react-navigation';
 
 export const fieldChange = (payload) => {
   return {
@@ -52,9 +51,6 @@ function createNewUser(user, payload) {
   firebase.database().ref('users/').push(userData);
 }
 
-
-
-
 // Login actions
 export const LoginAction = (payload) => {
   return (dispatch) => {
@@ -92,7 +88,7 @@ export const LogoutAction = () => {
         logoutFail(dispatch, error);
     });
   };
-}
+};
   // Login success function
   const logoutSuccess = (dispatch, user) => {
     // dispatch an action
@@ -100,7 +96,9 @@ export const LogoutAction = () => {
       type: 'LOGOUT_SUCCESS',
       payload: user
     });
+    Actions.dashboard();
   };
+
   // Login fail function
   const logoutFail = (dispatch, error) => {
     dispatch({
@@ -108,13 +106,3 @@ export const LogoutAction = () => {
       payload: error
     });
   };
-
-
-
-function navvv(dispatch){
-  const navigateAction = NavigationActions.navigate({
-    routeName: 'dashboard',
-    params: 'dd',
-  })
-  this.props.navigation.dispatch(navigateAction)
-}

@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   error: null,
   loading: false,
   status: false,
-  redirect : ''
+  redirectTarget: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -41,8 +41,8 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         ...INITIAL_STATE,
-        redirect : 'dashboard',
-        user: action.payload
+        user: action.payload,
+        redirectTarget: 'dashboard'
       };
     case 'LOGIN_FAIL':
       return {
@@ -60,10 +60,9 @@ export default (state = INITIAL_STATE, action) => {
         return {
           ...state,
           ...INITIAL_STATE,
-          user: NULL,
-          status: true,
-          redirect : 'login',
+          user: null,
           msg: action.payload,
+          redirectTarget: 'login'
         };
       case 'LOGOUT_FAIL':
         return {
@@ -71,8 +70,6 @@ export default (state = INITIAL_STATE, action) => {
           status: false,
           msg: action.payload,
         };
-
-
 
     default:
       return state;

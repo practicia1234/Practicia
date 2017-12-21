@@ -3,13 +3,13 @@ import {
   Text,
   View,
   ScrollView,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { fieldChange, LoginAction } from '../../actions';
-import { Button, Section, Input, Alert } from '../Helpers';
+import { Button, Section, Input } from '../Helpers';
 
-class LoginCmp extends Component {
+class LoginComp extends Component {
 
   // Navigator information for this component
   static navigationOptions = {
@@ -22,25 +22,7 @@ class LoginCmp extends Component {
     },
   };
 
-componentWillMount() {
-  console.log('componentWillMount');
-}
-
-  componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps');
-    if (nextProps.redirectTarget != '') {
-      console.log('ddd');
-      const { navigate } = this.props.navigation;
-      navigate(nextProps.redirectTarget, { redirectTarget: '' });
-    }
-  }
-
-  componentWillUpdate() {
-    console.log('componentWillUpdate');
-  }
-
-
-  // on text input field change call this method
+  // on email change call this method
   onFieldChange(e, text) {
     const fieldInfo = {
       actionType: e.actionType,
@@ -49,22 +31,13 @@ componentWillMount() {
     this.props.fieldChange(fieldInfo); // fieldChange is the action creator
   }
 
-// submit the login form
-LoginAction() {
-  const payload = {
-    email: this.props.email,
-    password: this.props.password
-  };
-  this.props.LoginAction(payload); // Action call
-}
-
-alertMessage() {
-  if (this.props.status) {
-    return (
-      <Alert>{this.props.error.coreError.message}</Alert>
-    );
+  onPressLogin() {
+    const payload = {
+      email: this.props.email,
+      password: this.props.password
+    };
+    this.props.LoginAction(payload); // Action call
   }
-}
 
   render() {
     return (
@@ -72,10 +45,12 @@ alertMessage() {
         style={styles.container}
         behavior="padding"
       >
-      <View>
-        <ScrollView contentContainerStyle={styles.contentContainer}>
+      <View >
+        <ScrollView
+          contentContainerStyle={styles.contentContainer}
+
+        >
           <Text style={styles.headerText}> Login </Text>
-          {this.alertMessage()}
           <Section>
             <Input
               placeholder="email@gmail.com"
@@ -93,10 +68,10 @@ alertMessage() {
           </Section>
           <Section>
             <Button
-              onPress={this.LoginAction.bind(this)}
+              onPress={this.onPressLogin.bind(this)}
               style={styles.buttonLogin}
             >
-              Submit
+              Login
             </Button>
           </Section>
         </ScrollView>
@@ -131,10 +106,8 @@ const styles = {
     marginBottom: 30,
   },
 };
-
 const mapStateToProps = ({ auth }) => {
-  console.log(auth);
   return auth;
 };
 
-export default connect(mapStateToProps, { fieldChange, LoginAction })(LoginCmp);
+export default connect(mapStateToProps, { fieldChange, LoginAction })(LoginComp);
