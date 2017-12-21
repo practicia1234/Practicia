@@ -4,8 +4,10 @@ const INITIAL_STATE = {
   firstName: '',
   lastName: '',
   user: null,
-  error: '',
-  loading: false
+  error: null,
+  loading: false,
+  status: false,
+  redirect : ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -30,10 +32,48 @@ export default (state = INITIAL_STATE, action) => {
     case 'SIGNUP_FAIL':
       return {
         ...state,
-        error: 'Authentication Failed.',
+        error: 'Signup Failed.',
         coreError: action.payload,
         loading: false
       };
+
+    case 'LOGIN_SUCCESS':
+      return {
+        ...state,
+        ...INITIAL_STATE,
+        redirect : 'dashboard',
+        user: action.payload
+      };
+    case 'LOGIN_FAIL':
+      return {
+        ...state,
+        ...INITIAL_STATE,
+        status: true,
+        error: {
+            msg: 'Authentication Failed',
+            coreError: action.payload,
+        },
+        user: null,
+        loading: false
+      };
+      case 'LOGOUT_SUCCESS':
+        return {
+          ...state,
+          ...INITIAL_STATE,
+          user: NULL,
+          status: true,
+          redirect : 'login',
+          msg: action.payload,
+        };
+      case 'LOGOUT_FAIL':
+        return {
+          ...state,
+          status: false,
+          msg: action.payload,
+        };
+
+
+
     default:
       return state;
   }
