@@ -1,5 +1,7 @@
 import firebase from 'firebase';
+import { NavigationActions } from 'react-navigation';
 
+// textbox fields change
 export const fieldChange = (payload) => {
   return {
     type: payload.actionType,
@@ -7,6 +9,7 @@ export const fieldChange = (payload) => {
   };
 };
 
+// Signup action
 export const SignUpAction = (payload) => {
   return (dispatch) => {
     console.log(payload);
@@ -61,14 +64,15 @@ export const LoginAction = (payload) => {
     });
   };
 };
-
 // Login success function
 const loginSuccess = (dispatch, user) => {
+  console.log('loginSuccess');
   // dispatch an action
   dispatch({
     type: 'LOGIN_SUCCESS',
     payload: user
   });
+  // redirect to dashboard
 };
 // Login fail function
 const loginFail = (dispatch, error) => {
@@ -89,20 +93,18 @@ export const LogoutAction = () => {
     });
   };
 };
-  // Login success function
-  const logoutSuccess = (dispatch, user) => {
-    // dispatch an action
-    dispatch({
-      type: 'LOGOUT_SUCCESS',
-      payload: user
-    });
-    Actions.dashboard();
-  };
-
-  // Login fail function
-  const logoutFail = (dispatch, error) => {
-    dispatch({
-      type: 'LOGOUT_FAIL',
-      payload: error
-    });
-  };
+// Login success function
+const logoutSuccess = (dispatch, user) => {
+  // dispatch an action
+  dispatch({
+    type: 'LOGOUT_SUCCESS',
+    payload: user
+  });
+};
+// Login fail function
+const logoutFail = (dispatch, error) => {
+  dispatch({
+    type: 'LOGOUT_FAIL',
+    payload: error
+  });
+};

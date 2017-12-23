@@ -22,24 +22,6 @@ class LoginCmp extends Component {
     },
   };
 
-componentWillMount() {
-  console.log('componentWillMount');
-}
-
-  componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps');
-    if (nextProps.redirectTarget != '') {
-      console.log('ddd');
-      const { navigate } = this.props.navigation;
-      navigate(nextProps.redirectTarget, { redirectTarget: '' });
-    }
-  }
-
-  componentWillUpdate() {
-    console.log('componentWillUpdate');
-  }
-
-
   // on text input field change call this method
   onFieldChange(e, text) {
     const fieldInfo = {
@@ -133,7 +115,6 @@ const styles = {
 };
 
 const mapStateToProps = ({ auth }) => {
-  console.log(auth);
   return auth;
 };
 

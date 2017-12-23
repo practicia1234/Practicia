@@ -10,6 +10,18 @@ import { Section, Button } from '../Helpers';
 
 class DashboardCmp extends Component {
 
+  // Navigator information for this component
+  static navigationOptions = {
+    title: 'Dashboard',
+    headerLeft: null,
+    headerTitleStyle: {
+      fontWeight: '500',
+      fontSize: 15,
+      paddingRight: 0,
+      alignSelf: 'center'
+    },
+  };
+
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
   }

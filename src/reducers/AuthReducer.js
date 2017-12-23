@@ -41,8 +41,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         ...INITIAL_STATE,
-        user: action.payload,
-        redirectTarget: 'dashboard'
+        user: action.payload
       };
     case 'LOGIN_FAIL':
       return {
