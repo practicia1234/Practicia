@@ -18,9 +18,12 @@ class Screen1View extends Component {
     this.props.navigation.dispatch(navigateToScreen2);
   };
 
+  incrementActionNew() {
+    this.props.incrementAction();
+  }
+
   render() {
-    console.log(this.props);
-    //const { counterCount, incrementAction, decrementAction } = this.props;
+    const { counter } = this.props.CounterReducer;
     return (
       <View
         style={{
@@ -30,16 +33,16 @@ class Screen1View extends Component {
           alignItems: 'center'
         }}
       >
-        <Text>{this.props.counterCount}</Text>
+        <Text>counterCount: {counter}</Text>
         <View style={{ height: 100, flexDirection: 'row' }}>
           <TouchableOpacity
-            onPress={() => this.props.incrementAction()}
+            onPress={this.incrementActionNew.bind(this)}
             style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
           >
             <Text
               style={{ textDecorationLine: 'underline', fontWeight: '600' }}
             >
-              INCREMENT
+              INCREMENT NEW
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -70,15 +73,15 @@ class Screen1View extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  counterCount: state.CounterReducer.counter
-});
+const mapStateToProps = (state) => {
+  console.log('mapStateToProps');
+  console.log(state);
+  return state;
+};
 
 const mapDispatchToProps = {
   incrementAction,
   decrementAction
 };
 
-const Screen1 = connect(mapStateToProps, mapDispatchToProps)(Screen1View);
-
-export default Screen1;
+export default connect(mapStateToProps, mapDispatchToProps)(Screen1View);

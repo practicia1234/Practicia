@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { incrementAction } from '../Actions/actionCreator';
