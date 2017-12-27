@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { incrementAction } from '../actions/actionCreator';
+import { incrementAction } from '../Actions/actionCreator';
 
 class Screen2 extends Component {
   static navigationOptions = {

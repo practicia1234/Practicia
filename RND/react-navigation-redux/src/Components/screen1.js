@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import { incrementAction, decrementAction } from '../actions/actionCreator';
+import { incrementAction, decrementAction } from '../Actions/actionCreator';
 
 class Screen1View extends Component {
   static navigationOptions = {

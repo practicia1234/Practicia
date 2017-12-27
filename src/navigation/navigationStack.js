@@ -1,12 +1,12 @@
 import { StackNavigator } from 'react-navigation';
-import Screen1 from '../components/screen1';
-import Screen2 from '../components/screen2';
-import Screen3 from '../components/screen3';
+import Home from '../components/Home';
+import Login from '../components/authentication/Login';
+import Dashboard from '../components/Dashboard';
 
 const navigator = StackNavigator({
-  screen1: { screen: Screen1 },
-  screen2: { screen: Screen2 },
-  screen3: { screen: Screen3 },
+  home: { screen: Home },
+  login: { screen: Login },
+  dashboard: { screen: Dashboard },
 });
 
 export default navigator;
