@@ -1,4 +1,4 @@
-import { incrementCounter, decrementCounter } from "../Actions/actionTypes";
+import { incrementCounter, decrementCounter } from '../actions/actionTypes';
 
 const initialState = { counter: 0 };
 
@@ -9,6 +9,9 @@ const counterReducer = (state = initialState, action) => {
 
     case decrementCounter:
       return { ...state, counter: state.counter - 1 };
+
+    case 'MOVED_2_SCREEN3':
+      return { ...state, counter: state.counter - 1, screen: 'SCREEN3' };
 
     default:
       return state;

@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux';
-import AuthReducer from './AuthReducer';
+import CounterReducer from './counterReducer';
+import NavigationReducer from './navigationReducer';
 
-export default combineReducers({
-  auth: AuthReducer
+const AppReducer = combineReducers({
+  CounterReducer,
+  NavigationReducer
 });
+
+export default AppReducer;

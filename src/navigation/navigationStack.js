@@ -1,7 +1,7 @@
 import { StackNavigator } from 'react-navigation';
-import Screen1 from '../Components/screen1';
-import Screen2 from '../Components/screen2';
-import Screen3 from '../Components/screen3';
+import Screen1 from '../components/screen1';
+import Screen2 from '../components/screen2';
+import Screen3 from '../components/screen3';
 
 const navigator = StackNavigator({
   screen1: { screen: Screen1 },
