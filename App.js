@@ -5,7 +5,6 @@ import firebase from 'firebase';
 import store from './src/config/store';
 import AppNavigation from './src/navigation';
 
-
 class App extends Component {
 
   componentWillMount() {
@@ -17,7 +16,6 @@ class App extends Component {
       storageBucket: 'practiciaappsubu.appspot.com',
       messagingSenderId: '753143230840'
     });
-
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log('logged In');

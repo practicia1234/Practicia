@@ -3,13 +3,15 @@ import {
   Text,
   View,
   Image,
-  ScrollView
+  ScrollView,
+  Switch
 } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 
 import { Button, Section } from './helpers';
 import { userType } from '../config/MasterData';
+import { firebaseEnvAction } from '../actions/HomeAction';
 
 class Home extends Component {
   static navigationOptions = {
@@ -30,60 +32,82 @@ onPressLogin() {
   this.props.navigation.dispatch(navigateToLogin);
 }
 
+firebaseEnv(val) {
+  this.props.firebaseEnvAction(val);
+}
 
-  /*<View style={styles.logoContainer}>
-    <Image
-      style={styles.logo}
-      source={require('../assets/images/logo.gif')}
-    />
-
-  </View>*/
-  
   render() {
     return (
       <ScrollView contentContainerStyle={styles.contentContainer}>
-    <View style={styles.container}>
-      <View style={styles.contentArea}>
-        <Text style={styles.signInAs}>Sign Up As...</Text>
-        <Section>
-          <Button
-          onPress={this.onPressSignupAs.bind(this, userType.teacher)}
-          >
-            {userType.teacher.showText}
-          </Button>
-        </Section>
-        <Section>
-          <Button
-          onPress={this.onPressSignupAs.bind(this, userType.parent)}
-          >{userType.parent.showText}</Button>
-        </Section>
-        <Section>
-          <Button
-          onPress={this.onPressSignupAs.bind(this, userType.student)}
-          >
-          {userType.student.showText}
-          </Button>
-        </Section>
-      </View>
-      <View style={styles.LoginBox}>
-        <Text style={styles.LoginText}>Already have an account? </Text>
-        <Section>
-          <Button
-          style={styles.buttonLogin}
-          styleText={styles.buttonText}
-          onPress={this.onPressLogin.bind(this)}
-          >
-            Login
-          </Button>
-        </Section>
-      </View>
-    </View>
-    </ScrollView>
+        <View style={styles.container}>
+          <View style={styles.logoContainer}>
+              <Image
+                style={styles.logo}
+                source={require('../assets/images/logo.png')}
+              />
+            </View>
+          <View style={styles.contentArea}>
+            <Text style={styles.signInAs}>Sign Up As...</Text>
+            <Section>
+              <Button
+              onPress={this.onPressSignupAs.bind(this, userType.teacher)}
+              >
+                {userType.teacher.showText}
+              </Button>
+            </Section>
+            <Section>
+              <Button
+              onPress={this.onPressSignupAs.bind(this, userType.parent)}
+              >{userType.parent.showText}</Button>
+            </Section>
+            <Section>
+              <Button
+              onPress={this.onPressSignupAs.bind(this, userType.student)}
+              >
+              {userType.student.showText}
+              </Button>
+            </Section>
+          </View>
+          <View style={styles.LoginBox}>
+            <Text style={styles.LoginText}>Already have an account? </Text>
+            <Section>
+              <Button
+              style={styles.buttonLogin}
+              styleText={styles.buttonText}
+              onPress={this.onPressLogin.bind(this)}
+              >
+                Login
+              </Button>
+            </Section>
+            <Section>
+              <Text style={styles.firebaseText}>Firebase:
+                <Switch
+                  value={this.props.HomeReducer.firebaseToggle}
+                  onValueChange={(val) => this.firebaseEnv(val)}
+                  disabled={false}
+                  activeText={'Prod'}
+                  inActiveText={'Dev'}
+                  circleSize={30}
+                  barHeight={1}
+                  circleBorderWidth={3}
+                  backgroundActive={'green'}
+                  backgroundInactive={'gray'}
+                  circleActiveColor={'#30a566'}
+                  circleInActiveColor={'#000000'}
+                />
+              </Text>
+            </Section>
+          </View>
+        </View>
+        </ScrollView>
     );
   }
 }
 
 const styles = {
+  firebaseText: {
+    fontSize: 20
+  },
   contentContainer: {
     flex: 1
   },
@@ -147,5 +171,7 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  firebaseEnvAction
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
