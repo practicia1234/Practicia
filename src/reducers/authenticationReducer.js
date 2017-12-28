@@ -2,7 +2,9 @@ import {
   typeLoginSuccess,
   typeLoginFail,
   typeLogoutSuccess,
-  typeLogoutFail
+  typeLogoutFail,
+  typeSignUpSuccess,
+  typeSignUpFail
 } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
@@ -10,15 +12,25 @@ const INITIAL_STATE = {
   password: '',
   error: '',
   user: '',
-  success: ''
+  success: '',
+  firstName: '',
+  lastName: '',
 };
 
 const authenticationReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+
+// Field value change action
     case 'EMAIL_CHANGED':
       return { ...state, email: action.payload };
     case 'PASSWORD_CHANGED':
       return { ...state, password: action.payload };
+    case 'FIRST_NAME':
+      return { ...state, firstName: action.payload };
+    case 'LAST_NAME':
+      return { ...state, lastName: action.payload };
+
+// Login action
     case typeLoginSuccess:
       return { ...state, user: action.payload };
     case typeLoginFail:
@@ -28,6 +40,13 @@ const authenticationReducer = (state = INITIAL_STATE, action) => {
     case typeLogoutFail:
       return { ...state, error: action.payload };
 
+// Signup action
+    case typeSignUpSuccess:
+      return { ...state, ...INITIAL_STATE, user: action.payload };
+    case typeSignUpFail:
+      return { ...state, error: action.payload };
+
+// Default action
     default:
       return state;
   }

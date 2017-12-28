@@ -5,3 +5,5 @@ export const typeLoginFail = 'LOGIN_FAIL';
 export const typeLogoutSuccess = 'LOGOUT_SUCCESS';
 export const typeLogoutFail = 'LOGOUT_FAIL';
 export const typeFirebaseEnviornment = 'FIREBASE_ENV_TOGGLE';
+export const typeSignUpSuccess = 'SIGNUP_SUCCESS';
+export const typeSignUpFail = 'SIGNUP_FAIL';

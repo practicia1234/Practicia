@@ -4,7 +4,9 @@ import {
   typeLoginSuccess,
   typeLoginFail,
   typeLogoutSuccess,
-  typeLogoutFail
+  typeLogoutFail,
+  typeSignUpSuccess,
+  typeSignUpFail
 } from './actionTypes';
 
 export const onFieldChangeAction = (payload) => {
@@ -80,4 +82,49 @@ function logoutFail(dispatch, error) {
         msg: error.message
       }
     });
+}
+
+// Signup action
+export const SignUpAction = (payload) => {
+  return (dispatch) => {
+    console.log(payload);
+    const email = payload.email;
+    const password = payload.password;
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(user => signUpSuccessCb(dispatch, user, payload))
+      .catch((error) => {
+        signUpFailCb(dispatch, error);
+      });
+  };
+};
+// Signup success function
+const signUpSuccessCb = (dispatch, user, payload) => {
+  // [Function] to Create a user in database
+  createNewUser(user, payload);
+  // dispatch an action
+  dispatch({
+    type: typeSignUpSuccess,
+    payload: user
+  });
+  // redirect to dashboard
+  dispatch(NavigationActions.navigate({ routeName: 'dashboard' }));
+};
+
+// signup fail function
+const signUpFailCb = (dispatch, error) => {
+  dispatch({
+    type: typeSignUpFail,
+    payload: error
+  });
+};
+// create new user in database
+function createNewUser(user, payload) {
+  const userData = {
+    role: payload.role,
+    email: payload.email,
+    password: payload.password,
+    firstName: payload.firstName,
+    lastName: payload.lastName,
+  };
+  firebase.database().ref('users/').push(userData);
 }

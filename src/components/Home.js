@@ -8,33 +8,55 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
+import firebase from 'firebase';
 
 import { Button, Section } from './helpers';
 import { userType } from '../config/MasterData';
 import { firebaseEnvAction } from '../actions/HomeAction';
+import { development, production } from '../config/Firebase';
 
 class Home extends Component {
   static navigationOptions = {
     title: '.: Practicia :.'
   };
 
-onPressSignupAs(userInfo) {
-  // Navigate to sign up page with the user information
-  console.log(userInfo);
-}
+  componentWillMount() {
+    // initialise firebase development
+      firebase.initializeApp(development);
+  }
 
-onPressLogin() {
-  // Navigate to login page
-  const navigateToLogin = NavigationActions.navigate({
-    routeName: 'login',
-    params: {}
-  });
-  this.props.navigation.dispatch(navigateToLogin);
-}
+  onPressSignupAs(userInfo) {
+    // Navigate to sign up page with the user information
+    const navigateToSignUp = NavigationActions.navigate({
+      routeName: 'signup',
+      params: userInfo
+    });
+    this.props.navigation.dispatch(navigateToSignUp);
+  }
 
-firebaseEnv(val) {
-  this.props.firebaseEnvAction(val);
-}
+  onPressLogin() {
+    // Navigate to login page
+    const navigateToLogin = NavigationActions.navigate({
+      routeName: 'login',
+      params: {}
+    });
+    this.props.navigation.dispatch(navigateToLogin);
+  }
+
+// change firebase database based on toggle
+  firebaseEnv(val) {
+    this.props.firebaseEnvAction(val);
+    if (val === true) {
+      firebase.app().delete().then(() => {
+        firebase.initializeApp(production);
+      });
+    } else {
+      firebase.app().delete().then(() => {
+        firebase.initializeApp(development);
+      });
+    }
+  }
+
 
   render() {
     return (
