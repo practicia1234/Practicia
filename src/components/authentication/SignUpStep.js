@@ -58,7 +58,7 @@ class SignUp extends Component {
           <Text style={styles.headerText}> {this.props.navigation.state.params.showText} </Text>
           <Section>
             <Input
-              placeholder="email@gmail.com"
+              placeholder="email@email.com"
               onChangeText={this.onFieldChange.bind(this, { actionType: 'EMAIL_CHANGED' })}
               value={this.props.email}
             />

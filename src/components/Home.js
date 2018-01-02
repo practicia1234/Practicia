@@ -102,7 +102,7 @@ class Home extends Component {
               </Button>
             </Section>
             <Section>
-              <Text style={styles.firebaseText}>Firebase:
+              <Text style={styles.firebaseText}>Production:
                 <Switch
                   value={this.props.HomeReducer.firebaseToggle}
                   onValueChange={(val) => this.firebaseEnv(val)}
