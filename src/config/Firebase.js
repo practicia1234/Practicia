@@ -1,17 +1,17 @@
 export const development = {
-  apiKey: 'AIzaSyAandJABqieT3fXk2palvAgbYz5B8y9EsM',
-  authDomain: 'practiciaappsubu.firebaseapp.com',
-  databaseURL: 'https://practiciaappsubu.firebaseio.com',
-  projectId: 'practiciaappsubu',
-  storageBucket: 'practiciaappsubu.appspot.com',
-  messagingSenderId: '753143230840'
+  apiKey: 'AIzaSyDlm9P1cGiMo-fg8s-DenQ0KCAF-7lAZi4',
+  authDomain: 'practiciadevelopment.firebaseapp.com',
+  databaseURL: 'https://practiciadevelopment.firebaseio.com',
+  projectId: 'practiciadevelopment',
+  storageBucket: 'practiciadevelopment.appspot.com',
+  messagingSenderId: '29691347693'
 };
 
 export const production = {
-  apiKey: 'AIzaSyCTbeVmMMXoR_f-4RXs6TE2mDjmuWGVRic',
-  authDomain: 'reactnative-ba0a5.firebaseapp.com',
-  databaseURL: 'https://reactnative-ba0a5.firebaseio.com',
-  projectId: 'reactnative-ba0a5',
-  storageBucket: 'reactnative-ba0a5.appspot.com',
-  messagingSenderId: '228837289420'
+  apiKey: 'AIzaSyCce8WlbcA2fNe-VuIPToTdKk6Ldo913YQ',
+  authDomain: 'practicia-f257d.firebaseapp.com',
+  databaseURL: 'https://practicia-f257d.firebaseio.com',
+  projectId: 'practicia-f257d',
+  storageBucket: 'practicia-f257d.appspot.com',
+  messagingSenderId: '441804225611'
 };

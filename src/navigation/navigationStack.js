@@ -1,74 +1,87 @@
 import { StackNavigator, TabNavigator } from 'react-navigation';
-import Home from '../components/Home';
-import Login from '../components/authentication/Login';
-//import Dashboard from '../components/Dashboard';
-//import FeedScreen from '../components/FeedScreen';
-import AwardsScreen from '../components/AwardsScreen';
-//import StudentsScreen from '../components/StudentsScreen';
-import GameOnScreen from '../components/GameOnScreen';
-import UploadsScreen from '../components/UploadsScreen';
-import AllPractice from '../components/AllPractice';
-import Practice from '../components/Practice';
-import PlayingTests from '../components/PlayingTests';
-import Questions from '../components/Questions';
-import Individuals from '../components/Individuals';
-import Groups from '../components/Groups';
-import Pending from '../components/Pending';
 
+// Home scenes
+import Home from '../scenes/Home';
 
-import SignUpStep from '../components/authentication/SignUpStep';
+// Authentication scenes
+import Login from '../scenes/authentication/Login';
+import SignUpStep from '../scenes/authentication/SignUpStep';
 
+// import Dashboard from '../components/Dashboard'
+// import FeedScreen from '../components/FeedScreen'
+import AwardsScreen from '../scenes/award/AwardsScreen';
+// import StudentsScreen from '../components/StudentsScreen'
+import GameOnScreen from '../scenes/game/GameOnScreen';
+
+// All practice scenes
+import AllPractice from '../scenes/practice/AllPractice';
+import Practice from '../scenes/practice/Practice';
+import PlayingTests from '../scenes/practice/PlayingTests';
+import Questions from '../scenes/practice/Questions';
+import Individuals from '../scenes/practice/Individuals';
+
+// Group
+import Groups from '../scenes/group/Groups';
+
+// Upload
+import UploadsScreen from '../scenes/upload/UploadsScreen';
+import Pending from '../scenes/upload/Pending';
+
+// Constant for tab menus
+const submissionMenu = {
+  screen: TabNavigator({
+    All: { screen: AllPractice },
+    Practice: { screen: Practice },
+    PlayingTests: { screen: PlayingTests },
+    Questions: { screen: Questions }
+  }, {
+    tabBarPosition: 'top',
+    flex: 2 / 3,
+    tabBarOptions: {
+      activeBackgroundColor: '#33ACDE',
+      activeTintColor: 'white'
+    }
+  }
+  )
+};
+const studentMenu = {
+  screen: TabNavigator({
+    Individuals: { screen: Individuals },
+    Groups: { screen: Groups },
+    Pending: { screen: Pending }
+  }, {
+    tabBarPosition: 'top',
+    flex: 1 / 2,
+    tabBarOptions: {
+      activeBackgroundColor: '#33ACDE',
+      activeTintColor: 'white'
+    }
+  }
+  )
+};
+
+// Navigation defined
 const navigator = StackNavigator({
   home: { screen: Home },
+  signup: { screen: SignUpStep },
   login: { screen: Login },
   dashboard: {
     screen: TabNavigator({
-      Submissions: {
-        screen: TabNavigator({
-          All: { screen: AllPractice },
-          Practice: { screen: Practice },
-          PlayingTests: { screen: PlayingTests },
-          Questions: { screen: Questions },
-        }, {
-          tabBarPosition: 'top',
-          flex: 2 / 3,
-          tabBarOptions: {
-            activeBackgroundColor: '#33ACDE',
-            activeTintColor: 'white',
-          },
-        }
-      )
-       },
-      Students: {
-        screen: TabNavigator({
-          Individuals: { screen: Individuals },
-          Groups: { screen: Groups },
-          Pending: { screen: Pending },
-        }, {
-          tabBarPosition: 'top',
-          flex: 1 / 2,
-          tabBarOptions: {
-            activeBackgroundColor: '#33ACDE',
-            activeTintColor: 'white',
-
-          },
-        }
-      )
-      },
+      Submissions: submissionMenu,
+      Students: studentMenu,
       Awards: { screen: AwardsScreen },
       GameOn: { screen: GameOnScreen },
-      Uploads: { screen: UploadsScreen },
+      Uploads: { screen: UploadsScreen }
     }, {
       tabBarPosition: 'bottom',
       flex: 1 / 2,
       tabBarOptions: {
         activeBackgroundColor: '#33ACDE',
-        activeTintColor: 'white',
-        }
+        activeTintColor: 'white'
       }
+    }
     )
-  },
-  signup: { screen: SignUpStep },
+  }
 });
 
 export default navigator;

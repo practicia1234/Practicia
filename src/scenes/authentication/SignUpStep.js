@@ -10,7 +10,7 @@ import {
   onFieldChangeAction,
   SignUpAction
 } from '../../actions/authenticationAction'; // action included
-import { Button, Section, Input } from '../helpers';
+import { Button, Section, Input } from '../../components';
 
 class SignUp extends Component {
   // Navigator information for this component

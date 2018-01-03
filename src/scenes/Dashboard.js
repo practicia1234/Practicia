@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import { Button, Section } from './helpers';
+import { Button, Section } from '../components';
 import { logoutAction } from '../actions/authenticationAction'; // action included
 
 class Home extends Component {

@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import { Button, Section, Input, Alert } from '../helpers';
+import { Button, Section, Input, Alert } from '../../components';
 import {
   onFieldChangeAction,
   loginAction
