@@ -6,6 +6,7 @@ import Home from '../scenes/Home';
 // Authentication scenes
 import Login from '../scenes/authentication/Login';
 import SignUpStep from '../scenes/authentication/SignUpStep';
+import SelectTeachers from '../scenes/authentication/SelectTeachers';
 
 // import Dashboard from '../components/Dashboard'
 // import FeedScreen from '../components/FeedScreen'
@@ -65,6 +66,7 @@ const navigator = StackNavigator({
   home: { screen: Home },
   signup: { screen: SignUpStep },
   login: { screen: Login },
+  selectTeachers: { screen: SelectTeachers },
   dashboard: {
     screen: TabNavigator({
       Submissions: submissionMenu,

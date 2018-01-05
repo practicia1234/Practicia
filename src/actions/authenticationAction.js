@@ -107,7 +107,11 @@ const signUpSuccessCb = (dispatch, user, payload) => {
     payload: user
   });
   // redirect to dashboard
-  dispatch(NavigationActions.navigate({ routeName: 'dashboard' }));
+  if (payload.role === 'student') {
+    dispatch(NavigationActions.navigate({ routeName: 'selectTeachers' }));
+  } else {
+    dispatch(NavigationActions.navigate({ routeName: 'dashboard' }));
+  }
 };
 
 // signup fail function
