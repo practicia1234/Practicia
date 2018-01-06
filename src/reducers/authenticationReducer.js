@@ -4,7 +4,8 @@ import {
   typeLogoutSuccess,
   typeLogoutFail,
   typeSignUpSuccess,
-  typeSignUpFail
+  typeSignUpFail,
+  typeSelectTeacherAction
 } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
@@ -15,6 +16,7 @@ const INITIAL_STATE = {
   success: '',
   firstName: '',
   lastName: '',
+  switchButton: false
 };
 
 const authenticationReducer = (state = INITIAL_STATE, action) => {
@@ -45,6 +47,15 @@ const authenticationReducer = (state = INITIAL_STATE, action) => {
       return { ...state, ...INITIAL_STATE, user: action.payload };
     case typeSignUpFail:
       return { ...state, error: action.payload };
+
+//typeSelectTeacherAction
+    case typeSelectTeacherAction:
+      return {
+        ...state,
+        ...INITIAL_STATE,
+        teacherSelected: action.payload,
+        switchButton: action.payload.switchButton
+      };
 
 // Default action
     default:

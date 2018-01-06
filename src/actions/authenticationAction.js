@@ -6,7 +6,8 @@ import {
   typeLogoutSuccess,
   typeLogoutFail,
   typeSignUpSuccess,
-  typeSignUpFail
+  typeSignUpFail,
+  typeSelectTeacherAction
 } from './actionTypes';
 
 export const onFieldChangeAction = (payload) => {
@@ -113,7 +114,6 @@ const signUpSuccessCb = (dispatch, user, payload) => {
     dispatch(NavigationActions.navigate({ routeName: 'dashboard' }));
   }
 };
-
 // signup fail function
 const signUpFailCb = (dispatch, error) => {
   dispatch({
@@ -132,3 +132,15 @@ function createNewUser(user, payload) {
   };
   firebase.database().ref('users/').push(userData);
 }
+
+// selectTeacherAction
+export const selectTeacherAction = (payload) => {
+  return (dispatch) => {
+    // dispatch to reducer
+    console.log(payload);
+      dispatch({
+        type: typeSelectTeacherAction,
+        payload
+      });
+  };
+};

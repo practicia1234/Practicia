@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
+import { connect } from 'react-redux';
+
+import {
+  selectTeacherAction
+} from '../../actions/authenticationAction'; // action included
 
 class SelectTeachers extends Component {
   // Navigator information for this component
@@ -15,8 +20,11 @@ class SelectTeachers extends Component {
   }
 
   onPressSelectTeacher(teacherInfo, e) {
-    console.log(teacherInfo);
-    console.log(e);
+    const payloadData = {
+      switchButton: e,
+      teacherInfo
+    };
+    this.props.selectTeacherAction(payloadData);
   }
 
   render() {
@@ -82,7 +90,7 @@ class SelectTeachers extends Component {
         subtitle: 'Vice Chairman'
       }
     ];
-
+    console.log(this.props.authenticationReducer.switchButton);
     return (
       <View>
         <View>
@@ -100,6 +108,7 @@ class SelectTeachers extends Component {
                  title={listSingle.name}
                  switchButton
                  hideChevron
+                 switched={this.props.authenticationReducer.switchButton}
                  onSwitch={this.onPressSelectTeacher.bind(this, listSingle)}
                />
              ))}
@@ -110,4 +119,11 @@ class SelectTeachers extends Component {
   }
 }
 
-export default SelectTeachers;
+const mapStateToProps = (state) => {
+  return state;
+};
+
+const mapDispatchToProps = {
+  selectTeacherAction
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SelectTeachers);

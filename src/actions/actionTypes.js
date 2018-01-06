@@ -7,3 +7,4 @@ export const typeLogoutFail = 'LOGOUT_FAIL';
 export const typeFirebaseEnviornment = 'FIREBASE_ENV_TOGGLE';
 export const typeSignUpSuccess = 'SIGNUP_SUCCESS';
 export const typeSignUpFail = 'SIGNUP_FAIL';
+export const typeSelectTeacherAction = 'SELECT_TEACHER';
