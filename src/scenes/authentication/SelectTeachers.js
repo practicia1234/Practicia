@@ -28,13 +28,16 @@ class SelectTeachers extends Component {
   }
 
 checkStatus(data, teacherId) {
+  return false;
+  /*
   if (typeof (data) === 'undefined') {
   return false;
   }
   if (typeof (data[teacherId]) === 'undefined') {
     return false;
-  } 
+  }
   return data[teacherId];
+  */
 }
 
   render() {
@@ -58,7 +61,7 @@ checkStatus(data, teacherId) {
         subtitle: 'Vice President'
       }
     ];
-    //console.log(this.props.authenticationReducer);
+    console.log(this.props.authenticationReducer);
     return (
       <View>
         <View>
@@ -76,7 +79,7 @@ checkStatus(data, teacherId) {
                  title={listSingle.name}
                  switchButton
                  hideChevron
-                 switched={this.checkStatus(this.props.authenticationReducer.teacherSelected, listSingle.id)}
+                 switched={false}
                  onSwitch={this.onPressSelectTeacher.bind(this, listSingle)}
                />
              ))}

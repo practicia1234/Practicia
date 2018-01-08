@@ -16,7 +16,8 @@ const INITIAL_STATE = {
   success: '',
   firstName: '',
   lastName: '',
-  switchButton: false
+  switchButton: false,
+  teacherIds: []
 };
 
 const authenticationReducer = (state = INITIAL_STATE, action) => {
@@ -52,11 +53,11 @@ const authenticationReducer = (state = INITIAL_STATE, action) => {
     case typeSelectTeacherAction:
       return {
         ...state,
-        ...INITIAL_STATE,
-        teacherSelected: {
-          info: action.payload,
-          [action.payload.teacherInfo.id]: action.payload.switchButton
-        }
+        teacherSelected: action.payload,
+        teacherIds: [
+          ...state.teacherIds,
+          { [action.payload.teacherInfo.id]: action.payload.switchButton }
+        ]
       };
 
 // Default action

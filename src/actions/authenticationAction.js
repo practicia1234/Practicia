@@ -135,12 +135,8 @@ function createNewUser(user, payload) {
 
 // selectTeacherAction
 export const selectTeacherAction = (payload) => {
-  return (dispatch) => {
-    // dispatch to reducer
-//    console.log(payload);
-      dispatch({
-        type: typeSelectTeacherAction,
-        payload
-      });
-  };
+  return {
+    type: typeSelectTeacherAction,
+    payload
+  };  
 };
