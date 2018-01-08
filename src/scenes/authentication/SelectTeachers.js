@@ -22,75 +22,43 @@ class SelectTeachers extends Component {
   onPressSelectTeacher(teacherInfo, e) {
     const payloadData = {
       switchButton: e,
-      teacherInfo
+      teacherInfo,
     };
     this.props.selectTeacherAction(payloadData);
   }
 
+checkStatus(data, teacherId) {
+  if (typeof (data) === 'undefined') {
+  return false;
+  }
+  if (typeof (data[teacherId]) === 'undefined') {
+    return false;
+  } 
+  return data[teacherId];
+}
+
   render() {
     const list = [
       {
+        id: 1,
         name: 'Amy Farha',
         avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
         subtitle: 'Vice President'
       },
       {
+        id: 2,
         name: 'Chris Jackson',
         avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
         subtitle: 'Vice Chairman'
       },
       {
-        name: 'Amy Farha',
+        id: 3,
+        name: 'Amy Jackson',
         avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
         subtitle: 'Vice President'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Vice Chairman'
-      },
-      {
-        name: 'Amy Farha',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-        subtitle: 'Vice President'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Vice Chairman'
-      },
-      {
-        name: 'Amy Farha',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-        subtitle: 'Vice President'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Vice Chairman'
-      },
-      {
-        name: 'Amy Farha',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-        subtitle: 'Vice President'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Vice Chairman'
-      },
-      {
-        name: 'Amy Farha',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-        subtitle: 'Vice President'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Vice Chairman'
       }
     ];
-    console.log(this.props.authenticationReducer.switchButton);
+    //console.log(this.props.authenticationReducer);
     return (
       <View>
         <View>
@@ -108,7 +76,7 @@ class SelectTeachers extends Component {
                  title={listSingle.name}
                  switchButton
                  hideChevron
-                 switched={this.props.authenticationReducer.switchButton}
+                 switched={this.checkStatus(this.props.authenticationReducer.teacherSelected, listSingle.id)}
                  onSwitch={this.onPressSelectTeacher.bind(this, listSingle)}
                />
              ))}
