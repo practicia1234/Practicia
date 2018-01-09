@@ -5,7 +5,8 @@ import {
   typeLogoutFail,
   typeSignUpSuccess,
   typeSignUpFail,
-  typeSelectTeacherAction
+  typeSelectTeacherAction,
+  typeGetTeacherListAction
 } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
@@ -17,7 +18,8 @@ const INITIAL_STATE = {
   firstName: '',
   lastName: '',
   switchButton: false,
-  teacherIds: []
+  teacherIds: [],
+  teacherList: []
 };
 
 const authenticationReducer = (state = INITIAL_STATE, action) => {
@@ -54,11 +56,18 @@ const authenticationReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         teacherSelected: action.payload,
-        teacherIds: [
+        teacherIds: {
           ...state.teacherIds,
-          { [action.payload.teacherInfo.id]: action.payload.switchButton }
-        ]
+          [action.payload.teacherInfo.id]: action.payload.switchButton
+        }
       };
+
+//typeGetTeacherListAction
+case typeGetTeacherListAction:
+  return {
+    ...state,
+    teacherList: action.payload
+  };
 
 // Default action
     default:

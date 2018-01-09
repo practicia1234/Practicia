@@ -1,22 +1,32 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView } from 'react-native';
-import { List, ListItem } from 'react-native-elements';
+import { View, Text, ScrollView } from 'react-native';
+import { List, ListItem, SearchBar } from 'react-native-elements';
 import { connect } from 'react-redux';
 
+import firebase from 'firebase';
+import { development } from '../../config/Firebase';
+
 import {
-  selectTeacherAction
+  selectTeacherAction,
+  getTeacherListAction
 } from '../../actions/authenticationAction'; // action included
 
 class SelectTeachers extends Component {
   // Navigator information for this component
   static navigationOptions = {
-    title: 'Sign Up [Step-2]',
+    title: 'Select Teacher',
     headerTitleStyle: {
       fontWeight: '500',
       fontSize: 15,
       paddingRight: 0,
       alignSelf: 'center'
     }
+  }
+
+  componentWillMount() {
+    // Firebase initialise
+    firebase.initializeApp(development);
+    this.props.getTeacherListAction();
   }
 
   onPressSelectTeacher(teacherInfo, e) {
@@ -26,22 +36,19 @@ class SelectTeachers extends Component {
     };
     this.props.selectTeacherAction(payloadData);
   }
-
-checkStatus(data, teacherId) {
-  return false;
-  /*
-  if (typeof (data) === 'undefined') {
-  return false;
+  checkStatus(id) {
+    const arrayIds = this.props.authenticationReducer.teacherIds;
+    if (arrayIds[id] === 'undefined') {
+      return false;
+    }
+    return arrayIds[id];
   }
-  if (typeof (data[teacherId]) === 'undefined') {
-    return false;
+  searchText(e) {
+    console.log(e);
   }
-  return data[teacherId];
-  */
-}
 
   render() {
-    const list = [
+    const teacherList = [
       {
         id: 1,
         name: 'Amy Farha',
@@ -61,26 +68,33 @@ checkStatus(data, teacherId) {
         subtitle: 'Vice President'
       }
     ];
-    console.log(this.props.authenticationReducer);
+    const teacherDataList = this.props.authenticationReducer.teacherList;
+    console.log(teacherDataList);
     return (
       <View>
-        <View>
-          <Text>
-            Select teachers
-          </Text>
-        </View>
+          <SearchBar
+            round
+            lightTheme
+            onChangeText={this.searchText.bind(this)}
+            placeholder='Type Here...'
+          />
+          <View>
+            {teacherDataList.map((teacherOne, key) => (
+              <Text key={key}>ok - {key}</Text>
+            ))}
+          </View>
         <ScrollView>
           <List containerStyle={{ marginBottom: 20 }}>
-            {list.map((listSingle, key) => (
+            {teacherList.map((teacher, key) => (
                <ListItem
                  roundAvatar
-                 avatar={{ uri: listSingle.avatar_url }}
+                 avatar={{ uri: teacher.avatar_url }}
                  key={key}
-                 title={listSingle.name}
+                 title={teacher.name}
                  switchButton
                  hideChevron
-                 switched={false}
-                 onSwitch={this.onPressSelectTeacher.bind(this, listSingle)}
+                 switched={this.checkStatus(teacher.id)}
+                 onSwitch={this.onPressSelectTeacher.bind(this, teacher)}
                />
              ))}
           </List>
@@ -90,11 +104,13 @@ checkStatus(data, teacherId) {
   }
 }
 
+
 const mapStateToProps = (state) => {
   return state;
 };
 
 const mapDispatchToProps = {
-  selectTeacherAction
+  selectTeacherAction,
+  getTeacherListAction
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SelectTeachers);

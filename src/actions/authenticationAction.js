@@ -7,7 +7,8 @@ import {
   typeLogoutFail,
   typeSignUpSuccess,
   typeSignUpFail,
-  typeSelectTeacherAction
+  typeSelectTeacherAction,
+  typeGetTeacherListAction
 } from './actionTypes';
 
 export const onFieldChangeAction = (payload) => {
@@ -138,5 +139,23 @@ export const selectTeacherAction = (payload) => {
   return {
     type: typeSelectTeacherAction,
     payload
-  };  
+  };
+};
+
+// Get teacher List
+export const getTeacherListAction = () => {
+  return (dispatch) => {
+    // get teacher List
+    const teacherArray = [];
+    const ref = firebase.database().ref('users');
+    ref.orderByChild('role').equalTo('teacher').on('child_added', (snapshot) => {
+      // dispatch action to reducer
+      teacherArray.push(snapshot.val());
+    });
+    const teacherList = [];
+    dispatch({
+      type: typeGetTeacherListAction,
+      payload: teacherList
+    });
+  };
 };
