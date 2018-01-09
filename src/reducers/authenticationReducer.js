@@ -63,11 +63,11 @@ const authenticationReducer = (state = INITIAL_STATE, action) => {
       };
 
 //typeGetTeacherListAction
-case typeGetTeacherListAction:
-  return {
-    ...state,
-    teacherList: action.payload
-  };
+    case typeGetTeacherListAction:
+      return {
+        ...state,
+        teacherList: action.payload
+      };
 
 // Default action
     default:

@@ -146,16 +146,14 @@ export const selectTeacherAction = (payload) => {
 export const getTeacherListAction = () => {
   return (dispatch) => {
     // get teacher List
-    const teacherArray = [];
     const ref = firebase.database().ref('users');
-    ref.orderByChild('role').equalTo('teacher').on('child_added', (snapshot) => {
+    ref.orderByChild('role').equalTo('teacher').on('value', (snapshot) => {
       // dispatch action to reducer
-      teacherArray.push(snapshot.val());
-    });
-    const teacherList = [];
-    dispatch({
-      type: typeGetTeacherListAction,
-      payload: teacherList
+      const teacherData = snapshot.val();
+      dispatch({
+        type: typeGetTeacherListAction,
+        payload: teacherData
+      });
     });
   };
 };

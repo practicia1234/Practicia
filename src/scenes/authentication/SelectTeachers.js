@@ -69,7 +69,8 @@ class SelectTeachers extends Component {
       }
     ];
     const teacherDataList = this.props.authenticationReducer.teacherList;
-    console.log(teacherDataList);
+    const teacherDataListArray = Object.values(teacherDataList);
+    console.log(teacherDataListArray);
     return (
       <View>
           <SearchBar
@@ -79,9 +80,9 @@ class SelectTeachers extends Component {
             placeholder='Type Here...'
           />
           <View>
-            {teacherDataList.map((teacherOne, key) => (
-              <Text key={key}>ok - {key}</Text>
-            ))}
+          {teacherDataListArray.map((teacherOne, key) => (
+              <Text key={key}>{teacherOne.email}</Text>
+              ))}
           </View>
         <ScrollView>
           <List containerStyle={{ marginBottom: 20 }}>
