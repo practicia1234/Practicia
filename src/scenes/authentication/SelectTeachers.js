@@ -14,21 +14,37 @@ import {
 
 class SelectTeachers extends Component {
   // Navigator information for this component
-  static navigationOptions = {
-    title: 'Select Teacher',
-    headerRight: <Text style={styles.navigationRightText}>Done</Text>,
-    headerTitleStyle: {
-      fontWeight: '500',
-      fontSize: 15,
-      paddingRight: 0,
-      alignSelf: 'center',
-    }
+  static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state;
+    return {
+      title: 'Select Teacher',
+      headerTitleStyle: {
+        fontWeight: '600',
+        fontSize: 15,
+        paddingRight: 0,
+        alignSelf: 'center',
+      },
+      headerRight: <Text
+        style={styles.navigationRightText}
+        onPress={() => params.handleTeacherSelection()}
+      >
+        Done
+      </Text>
+    };
   }
+
 
   componentWillMount() {
     // Firebase initialise
     firebase.initializeApp(development);
     this.props.getTeacherListAction();
+  }
+  componentDidMount() {
+    this.props.navigation.setParams(
+      {
+        handleTeacherSelection: this.teacherSelectionDone.bind(this)
+      }
+    );
   }
   onPressSelectTeacher(teacherInfo, e) {
     const payloadData = {
@@ -44,9 +60,6 @@ class SelectTeachers extends Component {
     }
     return arrayIds[id];
   }
-  searchText(e) {
-    console.log(e);
-  }
   checkImage() {
     return 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg';
   }
@@ -60,6 +73,16 @@ class SelectTeachers extends Component {
     }
       return true;
   }
+  teacherSelectionDone() {
+    const selectedTeachers = this.props.authenticationReducer.teacherIds;
+    console.log('teacherSelectionDone');
+    console.log(selectedTeachers);
+  }
+  searchText(e) {
+    console.log(e);
+  }
+
+
   render() {
     console.log(this.props.authenticationReducer);
     const teacherList = this.props.authenticationReducer.teacherList;
