@@ -58,7 +58,7 @@ const authenticationReducer = (state = INITIAL_STATE, action) => {
         teacherSelected: action.payload,
         teacherIds: {
           ...state.teacherIds,
-          [action.payload.teacherInfo.id]: action.payload.switchButton
+          [action.payload.teacherInfo.key]: action.payload.switchButton
         }
       };
 

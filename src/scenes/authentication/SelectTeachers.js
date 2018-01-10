@@ -46,31 +46,14 @@ class SelectTeachers extends Component {
   searchText(e) {
     console.log(e);
   }
+  checkImage() {
+    return 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg';
+  }
 
   render() {
-    const teacherList = [
-      {
-        id: 1,
-        name: 'Amy Farha',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-        subtitle: 'Vice President'
-      },
-      {
-        id: 2,
-        name: 'Chris Jackson',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Vice Chairman'
-      },
-      {
-        id: 3,
-        name: 'Amy Jackson',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-        subtitle: 'Vice President'
-      }
-    ];
+    console.log(this.props.authenticationReducer);
     const teacherDataList = this.props.authenticationReducer.teacherList;
-    const teacherDataListArray = Object.values(teacherDataList);
-    console.log(teacherDataListArray);
+    const resTeacherList = Object.keys(teacherDataList).map(key => ({ key, value: teacherDataList[key] }));
     return (
       <View>
           <SearchBar
@@ -79,22 +62,17 @@ class SelectTeachers extends Component {
             onChangeText={this.searchText.bind(this)}
             placeholder='Type Here...'
           />
-          <View>
-          {teacherDataListArray.map((teacherOne, key) => (
-              <Text key={key}>{teacherOne.email}</Text>
-              ))}
-          </View>
         <ScrollView>
           <List containerStyle={{ marginBottom: 20 }}>
-            {teacherList.map((teacher, key) => (
+            {resTeacherList.map((teacher, key) => (
                <ListItem
                  roundAvatar
-                 avatar={{ uri: teacher.avatar_url }}
+                 avatar={{ uri: this.checkImage() }}
                  key={key}
-                 title={teacher.name}
+                 title={teacher.value.email}
                  switchButton
                  hideChevron
-                 switched={this.checkStatus(teacher.id)}
+                 switched={this.checkStatus(teacher.key)}
                  onSwitch={this.onPressSelectTeacher.bind(this, teacher)}
                />
              ))}
