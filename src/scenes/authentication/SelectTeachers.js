@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView } from 'react-native';
-import { List, ListItem, SearchBar } from 'react-native-elements';
+import { View, Text, ScrollView, ActivityIndicator } from 'react-native';
+import { List, ListItem, SearchBar, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import firebase from 'firebase';
 import { development } from '../../config/Firebase';
+import { styles } from '../../styles/Style';
 
 import {
   selectTeacherAction,
@@ -15,11 +16,12 @@ class SelectTeachers extends Component {
   // Navigator information for this component
   static navigationOptions = {
     title: 'Select Teacher',
+    headerRight: <Text style={styles.navigationRightText}>Done</Text>,
     headerTitleStyle: {
       fontWeight: '500',
       fontSize: 15,
       paddingRight: 0,
-      alignSelf: 'center'
+      alignSelf: 'center',
     }
   }
 
@@ -28,7 +30,6 @@ class SelectTeachers extends Component {
     firebase.initializeApp(development);
     this.props.getTeacherListAction();
   }
-
   onPressSelectTeacher(teacherInfo, e) {
     const payloadData = {
       switchButton: e,
@@ -49,19 +50,23 @@ class SelectTeachers extends Component {
   checkImage() {
     return 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg';
   }
-
+  pageLoading() {
+    if (this.props.authenticationReducer.loader) {
+      return (
+          <View style={styles.activityLoader}>
+              <ActivityIndicator size="small" color="#01A4E0" />
+          </View>
+      );
+    }
+      return true;
+  }
   render() {
     console.log(this.props.authenticationReducer);
-    const teacherDataList = this.props.authenticationReducer.teacherList;
-    const resTeacherList = Object.keys(teacherDataList).map(key => ({ key, value: teacherDataList[key] }));
+    const teacherList = this.props.authenticationReducer.teacherList;
+    const resTeacherList = Object.keys(teacherList).map(key => ({ key, value: teacherList[key] }));
     return (
-      <View>
-          <SearchBar
-            round
-            lightTheme
-            onChangeText={this.searchText.bind(this)}
-            placeholder='Type Here...'
-          />
+      <View style={styles.contentaaa}>
+        {this.pageLoading()}
         <ScrollView>
           <List containerStyle={{ marginBottom: 20 }}>
             {resTeacherList.map((teacher, key) => (

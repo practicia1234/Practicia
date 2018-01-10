@@ -10,6 +10,7 @@ import {
 } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
+  loader: true,
   email: '',
   password: '',
   error: '',
@@ -66,6 +67,7 @@ const authenticationReducer = (state = INITIAL_STATE, action) => {
     case typeGetTeacherListAction:
       return {
         ...state,
+        loader: false,
         teacherList: action.payload
       };
 
