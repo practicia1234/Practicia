@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, ActivityIndicator } from 'react-native';
-import { List, ListItem, SearchBar, Button } from 'react-native-elements';
+import { List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 
-import firebase from 'firebase';
-import { development } from '../../config/Firebase';
+//import firebase from 'firebase';
+//import { development } from '../../config/Firebase';
 import { styles } from '../../styles/Style';
 
 import {
   selectTeacherAction,
-  getTeacherListAction
+  getTeacherListAction,
+  saveSelectedTeachersWithStudentAction
 } from '../../actions/authenticationAction'; // action included
 
 class SelectTeachers extends Component {
@@ -33,10 +34,9 @@ class SelectTeachers extends Component {
     };
   }
 
-
   componentWillMount() {
     // Firebase initialise
-    firebase.initializeApp(development);
+    //firebase.initializeApp(development);
     this.props.getTeacherListAction();
   }
   componentDidMount() {
@@ -75,16 +75,17 @@ class SelectTeachers extends Component {
   }
   teacherSelectionDone() {
     const selectedTeachers = this.props.authenticationReducer.teacherIds;
-    console.log('teacherSelectionDone');
-    console.log(selectedTeachers);
+    console.log(this.props.authenticationReducer);
+    const payload = {
+      userId: this.props.authenticationReducer.user.userInsertetId,
+      selectedTeachers
+    };
+    // call saveSelectedTeachersWithStudent action
+    this.props.saveSelectedTeachersWithStudentAction(payload);
   }
-  searchText(e) {
-    console.log(e);
-  }
-
 
   render() {
-    console.log(this.props.authenticationReducer);
+    //console.log(this.props.authenticationReducer);
     const teacherList = this.props.authenticationReducer.teacherList;
     const resTeacherList = Object.keys(teacherList).map(key => ({ key, value: teacherList[key] }));
     return (
@@ -118,6 +119,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   selectTeacherAction,
-  getTeacherListAction
+  getTeacherListAction,
+  saveSelectedTeachersWithStudentAction
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SelectTeachers);

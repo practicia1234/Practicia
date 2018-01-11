@@ -9,3 +9,4 @@ export const typeSignUpSuccess = 'SIGNUP_SUCCESS';
 export const typeSignUpFail = 'SIGNUP_FAIL';
 export const typeSelectTeacherAction = 'SELECT_TEACHER';
 export const typeGetTeacherListAction = 'GET_TEACHER_LIST';
+export const typeSaveSelectedTeachersWithStudentAction = 'SAVE_TEACHER_STUDENT_RELATION';

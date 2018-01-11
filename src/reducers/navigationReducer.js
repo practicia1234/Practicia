@@ -1,7 +1,7 @@
 import AppNavigator from '../navigation/navigationStack';
 
 const initialState = AppNavigator.router.getStateForAction(
-  AppNavigator.router.getActionForPathAndParams('selectTeachers')
+  AppNavigator.router.getActionForPathAndParams('home')
 );
 const navigationReducer = (state = initialState, action) => {
   //console.log(action);

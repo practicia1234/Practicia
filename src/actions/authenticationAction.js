@@ -8,9 +8,11 @@ import {
   typeSignUpSuccess,
   typeSignUpFail,
   typeSelectTeacherAction,
-  typeGetTeacherListAction
+  typeGetTeacherListAction,
+  typeSaveSelectedTeachersWithStudentAction
 } from './actionTypes';
 
+// input field value action ================================================
 export const onFieldChangeAction = (payload) => {
   return (dispatch) => {
     // dispatch to reducer
@@ -22,7 +24,7 @@ export const onFieldChangeAction = (payload) => {
   };
 };
 
-// Login Action details
+// Login Action details==========================================
 export const loginAction = (payload) => {
   return (dispatch) => {
     // try to firebase login
@@ -53,7 +55,7 @@ function loginFail(dispatch, error) {
     });
 }
 
-// LogOut Action details
+// LogOut Action details==========================================
 export const logoutAction = () => {
   return (dispatch) => {
     firebase.auth().signOut()
@@ -86,7 +88,7 @@ function logoutFail(dispatch, error) {
     });
 }
 
-// Signup action
+// Signup action===============================================
 export const SignUpAction = (payload) => {
   return (dispatch) => {
     console.log(payload);
@@ -102,11 +104,11 @@ export const SignUpAction = (payload) => {
 // Signup success function
 const signUpSuccessCb = (dispatch, user, payload) => {
   // [Function] to Create a user in database
-  createNewUser(user, payload);
+  const userInsertetId = createNewUser(user, payload);
   // dispatch an action
   dispatch({
     type: typeSignUpSuccess,
-    payload: user
+    payload: { userInfo: user, userInsertetId }
   });
   // redirect to dashboard
   if (payload.role === 'student') {
@@ -130,11 +132,14 @@ function createNewUser(user, payload) {
     password: payload.password,
     firstName: payload.firstName,
     lastName: payload.lastName,
+    uid: user.uid
   };
-  firebase.database().ref('users/').push(userData);
+
+  const userInsertetId = firebase.database().ref('users/').push(userData).key;
+  return userInsertetId;
 }
 
-// selectTeacherAction
+// selectTeacherAction=======================================================
 export const selectTeacherAction = (payload) => {
   return {
     type: typeSelectTeacherAction,
@@ -142,7 +147,7 @@ export const selectTeacherAction = (payload) => {
   };
 };
 
-// Get teacher List
+// Get teacher List========================
 export const getTeacherListAction = () => {
   return (dispatch) => {
     // get teacher List
@@ -155,5 +160,13 @@ export const getTeacherListAction = () => {
         payload: teacherData
       });
     });
+  };
+};
+
+// Seletec teacher store in Firebase========================================
+export const saveSelectedTeachersWithStudentAction = (payload) => {
+  return (dispatch) => {
+    console.log(payload);
+    firebase.database().ref(`student_teacher/${payload.userId}`).set(payload.selectedTeachers);
   };
 };
