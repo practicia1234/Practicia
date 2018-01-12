@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
+import { styles } from '../sceneStyles';
+
 
 class Groups extends Component {
+  static navigationOptions = {
+    title: 'Questions',
+    headerLeft: null,
+    headerStyle: {
+        backgroundColor: '#33ACDE',
+      },
+      headerTitleStyle: {
+        color: 'white'
+        }
+  };
+
   render() {
     return (
-      <View>
+      <View style={styles.screenView} >
         <Text>Groups</Text>
         <Text>Groups</Text>
         <Text>Groups</Text>

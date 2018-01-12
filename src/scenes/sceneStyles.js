@@ -10,6 +10,6 @@ export const styles = {
   },
   screenView: {
     backgroundColor: 'white',
-    flex: 1 
+    flex: 1
   }
 };

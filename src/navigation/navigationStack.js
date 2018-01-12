@@ -19,14 +19,14 @@ import AllPractice from '../scenes/practice/AllPractice';
 import Practice from '../scenes/practice/Practice';
 import PlayingTests from '../scenes/practice/PlayingTests';
 import Questions from '../scenes/practice/Questions';
-import Individuals from '../scenes/practice/Individuals';
+import Individuals from '../scenes/students/individuals';
 
 // Group
-import Groups from '../scenes/group/Groups';
+import Groups from '../scenes/students/groups';
 
 // Upload
 import UploadsScreen from '../scenes/upload/UploadsScreen';
-import Pending from '../scenes/upload/Pending';
+import Pending from '../scenes/students/pending';
 
 // Constant for tab menus
 const submissionMenu = {
@@ -39,8 +39,13 @@ const submissionMenu = {
     tabBarPosition: 'top',
     flex: 2 / 3,
     tabBarOptions: {
-      activeBackgroundColor: '#33ACDE',
-      activeTintColor: 'white'
+      activeTintColor: '#33ACDE',
+      labelStyle: {
+          fontSize: 12,
+            },
+      tabStyle: {
+        width: 50,
+                },
     }
   }
   )
@@ -52,10 +57,15 @@ const studentMenu = {
     Pending: { screen: Pending }
   }, {
     tabBarPosition: 'top',
-    flex: 1 / 2,
+    flex: 2 / 3,
     tabBarOptions: {
-      activeBackgroundColor: '#33ACDE',
-      activeTintColor: 'white'
+      activeTintColor: '#33ACDE',
+      labelStyle: {
+          fontSize: 12,
+            },
+      tabStyle: {
+        width: 50,
+                },
     }
   }
   )
@@ -79,6 +89,12 @@ const navigator = StackNavigator({
 
       tabBarOptions: {
         activeTintColor: '#33ACDE',
+        labelStyle: {
+            fontSize: 12,
+              },
+        tabStyle: {
+          width: 50,
+                  }
 
       }
     }),
