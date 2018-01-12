@@ -76,14 +76,24 @@ const navigator = StackNavigator({
       Uploads: { screen: UploadsScreen }
     }, {
       tabBarPosition: 'bottom',
-      flex: 1 / 2,
+
       tabBarOptions: {
-        activeBackgroundColor: '#33ACDE',
-        activeTintColor: 'white'
+        activeTintColor: '#33ACDE',
+
+      }
+    }),
+
+    navigationOptions: {
+      title: 'PRACTICIA',
+      headerLeft: null,
+      headerStyle: {
+        backgroundColor: '#33ACDE',
+      },
+      headerTitleStyle: {
+        color: 'white'
+        }
       }
     }
-    )
-  }
 });
 
 export default navigator;
