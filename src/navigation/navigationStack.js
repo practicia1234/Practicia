@@ -82,17 +82,6 @@ const navigator = StackNavigator({
 
       }
     }),
-
-    navigationOptions: {
-      title: 'PRACTICIA',
-      headerLeft: null,
-      headerStyle: {
-        backgroundColor: '#33ACDE',
-      },
-      headerTitleStyle: {
-        color: 'white'
-        }
-      }
     }
 });
 
