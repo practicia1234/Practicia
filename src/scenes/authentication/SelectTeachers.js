@@ -34,9 +34,8 @@ class SelectTeachers extends Component {
     };
   }
 
+// method
   componentWillMount() {
-    // Firebase initialise
-    //firebase.initializeApp(development);
     this.props.getTeacherListAction();
   }
   componentDidMount() {

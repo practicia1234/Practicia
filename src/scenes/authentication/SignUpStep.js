@@ -3,7 +3,8 @@ import {
   Text,
   View,
   ScrollView,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
 import {
@@ -43,14 +44,26 @@ class SignUp extends Component {
     };
     this.props.SignUpAction(SignUpFields);
   }
+  pageLoading() {
+    if (this.props.authenticationReducer.loader) {
+      return (
+          <View style={styles.activityLoader}>
+              <ActivityIndicator size="small" color="#01A4E0" />
+          </View>
+      );
+    }
+      return true;
+  }
   // Render start
   render() {
+    console.log(this.props);
     return (
       <KeyboardAvoidingView
         style={styles.container}
         behavior="padding"
       >
       <View >
+      {this.pageLoading()}
         <ScrollView
           contentContainerStyle={styles.contentContainer}
 

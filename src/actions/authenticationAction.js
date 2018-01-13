@@ -9,7 +9,7 @@ import {
   typeSignUpFail,
   typeSelectTeacherAction,
   typeGetTeacherListAction,
-  typeSaveSelectedTeachersWithStudentAction
+  typeAddChildAction
 } from './actionTypes';
 
 // input field value action ================================================
@@ -91,7 +91,7 @@ function logoutFail(dispatch, error) {
 // Signup action===============================================
 export const SignUpAction = (payload) => {
   return (dispatch) => {
-    console.log(payload);
+    dispatch({ type: 'LOADER' }); // loader
     const email = payload.email;
     const password = payload.password;
     firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -112,13 +112,19 @@ const signUpSuccessCb = (dispatch, user, payload) => {
   });
   // redirect to dashboard
   if (payload.role === 'student') {
+    console.log('student');
     dispatch(NavigationActions.navigate({ routeName: 'selectTeachers' }));
+  } else if (payload.role === 'parent') {
+    console.log('parent');
+    dispatch(NavigationActions.navigate({ routeName: 'addchild' }));
   } else {
+    console.log('teacher');
     dispatch(NavigationActions.navigate({ routeName: 'dashboard' }));
   }
 };
 // signup fail function
 const signUpFailCb = (dispatch, error) => {
+  console.log(error);
   dispatch({
     type: typeSignUpFail,
     payload: error
@@ -150,6 +156,7 @@ export const selectTeacherAction = (payload) => {
 // Get teacher List========================
 export const getTeacherListAction = () => {
   return (dispatch) => {
+    dispatch({ type: 'LOADER' }); // loader 
     // get teacher List
     const ref = firebase.database().ref('users');
     ref.orderByChild('role').equalTo('teacher').on('value', (snapshot) => {
@@ -166,7 +173,21 @@ export const getTeacherListAction = () => {
 // Seletec teacher store in Firebase========================================
 export const saveSelectedTeachersWithStudentAction = (payload) => {
   return (dispatch) => {
-    console.log(payload);
     firebase.database().ref(`student_teacher/${payload.userId}`).set(payload.selectedTeachers);
+    dispatch(NavigationActions.navigate({ routeName: 'dashboard' }));
+  };
+};
+
+// Add a child ===================================================================
+export const addChildAction = (payload) => {
+  return (dispatch) => {
+    console.log(payload);
+    // push child info to userusers node in Firebase
+    const ChildId = firebase.database().ref('users/').push(payload).key;
+    dispatch({
+      type: typeAddChildAction,
+      payload: { userInsertetId: ChildId }
+    });
+    dispatch(NavigationActions.navigate({ routeName: 'selectTeachers' }));
   };
 };

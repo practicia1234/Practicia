@@ -6,11 +6,12 @@ import {
   typeSignUpSuccess,
   typeSignUpFail,
   typeSelectTeacherAction,
-  typeGetTeacherListAction
+  typeGetTeacherListAction,
+  typeAddChildAction
 } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
-  loader: true,
+  loader: false,
   email: '',
   password: '',
   error: '',
@@ -18,6 +19,7 @@ const INITIAL_STATE = {
   success: '',
   firstName: '',
   lastName: '',
+  username: '',
   switchButton: false,
   teacherIds: [],
   teacherList: []
@@ -25,6 +27,10 @@ const INITIAL_STATE = {
 
 const authenticationReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+
+// Loader 
+    case 'LOADER':
+      return { ...state, loader: true };
 
 // Field value change action
     case 'EMAIL_CHANGED':
@@ -35,6 +41,8 @@ const authenticationReducer = (state = INITIAL_STATE, action) => {
       return { ...state, firstName: action.payload };
     case 'LAST_NAME':
       return { ...state, lastName: action.payload };
+    case 'USERNAME':
+      return { ...state, username: action.payload };
 
 // Login action
     case typeLoginSuccess:
@@ -48,9 +56,9 @@ const authenticationReducer = (state = INITIAL_STATE, action) => {
 
 // Signup action
     case typeSignUpSuccess:
-      return { ...state, ...INITIAL_STATE, user: action.payload };
+      return { ...state, ...INITIAL_STATE, loader: false, user: action.payload };
     case typeSignUpFail:
-      return { ...state, error: action.payload };
+      return { ...state, loader: false, error: action.payload };
 
 //typeSelectTeacherAction
     case typeSelectTeacherAction:
@@ -69,6 +77,13 @@ const authenticationReducer = (state = INITIAL_STATE, action) => {
         ...state,
         loader: false,
         teacherList: action.payload
+      };
+// add child
+    case typeAddChildAction:
+      return {
+        ...state,
+        loader: false,
+        user: action.payload
       };
 
 // Default action
