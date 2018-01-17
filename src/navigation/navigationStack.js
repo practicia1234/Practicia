@@ -1,4 +1,4 @@
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation';
 
 // Home scenes
 import Home from '../scenes/Home';
@@ -28,6 +28,9 @@ import Groups from '../scenes/students/groups';
 // Upload
 import UploadsScreen from '../scenes/upload/UploadsScreen';
 import Pending from '../scenes/students/pending';
+
+//import CustomDrawerContentComponent from './CustomDrawerContentComponent';
+
 
 // Constant for tab menus
 const submissionMenu = {
@@ -75,7 +78,16 @@ const studentMenu = {
 // Navigation defined
 const navigator = StackNavigator({
   home: { screen: Home },
-  signup: { screen: SignUpStep },
+  signup: { screen: DrawerNavigator(
+    {
+      addchild: { screen: AddChild,
+          navigationOptions: {
+            drawerLabel: 'Add new child'
+          },
+        },
+      selectTeachers: { screen: SelectTeachers },
+    },
+  ) },
   login: { screen: Login },
   selectTeachers: { screen: SelectTeachers },
   addchild: { screen: AddChild },
@@ -88,7 +100,6 @@ const navigator = StackNavigator({
       Uploads: { screen: UploadsScreen }
     }, {
       tabBarPosition: 'bottom',
-
       tabBarOptions: {
         activeTintColor: '#33ACDE',
         labelStyle: {
@@ -100,7 +111,7 @@ const navigator = StackNavigator({
 
       }
     }),
-    }
+  }
 });
 
 export default navigator;

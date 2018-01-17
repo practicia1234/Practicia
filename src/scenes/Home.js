@@ -18,11 +18,12 @@ import { styles } from '../styles/HomeStyle';
 
 
 class Home extends Component {
+/*
   static navigationOptions = {
     title: '.: Practicia :.',
     header: null
   };
-
+*/
   componentWillMount() {
     // initialise firebase development
       firebase.initializeApp(development);

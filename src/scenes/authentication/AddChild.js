@@ -3,7 +3,9 @@ import {
   View,
   ScrollView,
   KeyboardAvoidingView,
-  ActivityIndicator
+  ActivityIndicator,
+  Image,
+  Text
 } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -15,14 +17,25 @@ import {
 
 class AddChild extends Component {
   // Navigator information for this component
-  static navigationOptions = {
-    title: 'Add a Child...',
-    headerTitleStyle: {
-      fontWeight: '500',
-      fontSize: 15,
-      paddingRight: 0,
-      alignSelf: 'center'
-    }
+  static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state;
+    return {
+      title: 'Add Child',
+      headerTitleStyle: {
+        fontWeight: '600',
+        fontSize: 15,
+        paddingRight: 0,
+        alignSelf: 'center',
+      },
+      headerLeft: <Text
+        onPress={() => navigation.navigate('DrawerOpen')}
+      >
+      <Image
+        style={styles.navigationIcon}
+        source={require('../../assets/images/threelines.png')}
+      />
+      </Text>
+    };
   }
 
   // input field data from redux
@@ -33,7 +46,6 @@ class AddChild extends Component {
       };
       this.props.onFieldChangeAction(fieldInfo);
     }
-
     onPressAddChild() {
       console.log('onPressAddChild');
       const payloadData = {
@@ -119,6 +131,11 @@ const styles = {
   },
   alertStyleColor: {
     color: '#00A629'
+  },
+  navigationIcon: {
+      marginLeft: 10,
+      width: 35,
+      height: 35
   }
 };
 const mapStateToProps = (state) => {
