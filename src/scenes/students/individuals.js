@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Scrollview } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { styles } from '../sceneStyles';
 
@@ -110,7 +110,7 @@ class Individuals extends Component {
   render() {
     return (
       <View style={styles.screenView} >
-
+      <ScrollView>
       <List containerStyle={{ marginBottom: 20 }}>
         {
           list.map((l, i) => (
@@ -124,7 +124,7 @@ class Individuals extends Component {
           ))
         }
       </List>
-
+      </ScrollView>
      </View>
 
 

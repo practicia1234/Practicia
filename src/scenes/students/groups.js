@@ -5,7 +5,7 @@ import { styles } from '../sceneStyles';
 
 class Groups extends Component {
   static navigationOptions = {
-    title: 'Questions',
+    title: 'Groups',
     headerLeft: null,
     headerStyle: {
         backgroundColor: '#33ACDE',
