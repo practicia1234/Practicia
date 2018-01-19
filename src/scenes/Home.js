@@ -14,19 +14,30 @@ import { Button, Section } from '../components';
 import { userType } from '../config/MasterData';
 import { firebaseEnvAction } from '../actions/HomeAction';
 import { development, production } from '../config/Firebase';
-import { styles } from '../styles/HomeStyle';
+import { homeStyles } from '../styles/HomeStyle';
 
 
 class Home extends Component {
-/*
-  static navigationOptions = {
-    title: '.: Practicia :.',
-    header: null
-  };
-*/
-  componentWillMount() {
-    // initialise firebase development
-      firebase.initializeApp(development);
+  static navigationOptions = ({ navigation }) => {
+    //const { params = {} } = navigation.state;
+    return {
+      title: 'PRACTICIA',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        paddingRight: 0,
+        alignSelf: 'center',
+        color: '#ffffff'
+      },
+      headerStyle: {
+        backgroundColor: '#2391BA',
+      },
+      headerLeft: <Text
+        onPress={() => navigation.navigate('DrawerOpen')}
+      >
+      Menu
+      </Text>
+    };
   }
 
   onPressSignupAs(userInfo) {
@@ -37,7 +48,6 @@ class Home extends Component {
     });
     this.props.navigation.dispatch(navigateToSignUp);
   }
-
   onPressLogin() {
     // Navigate to login page
     const navigateToLogin = NavigationActions.navigate({
@@ -46,8 +56,6 @@ class Home extends Component {
     });
     this.props.navigation.dispatch(navigateToLogin);
   }
-
-// change firebase database based on toggle
   firebaseEnv(val) {
     this.props.firebaseEnvAction(val);
     if (val === true) {
@@ -61,19 +69,18 @@ class Home extends Component {
     }
   }
 
-
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.contentContainer}>
-        <View style={styles.container}>
-          <View style={styles.logoContainer}>
+      <ScrollView contentContainerStyle={homeStyles.contentContainer}>
+        <View style={homeStyles.container}>
+          <View style={homeStyles.logoContainer}>
               <Image
-                style={styles.logo}
+                style={homeStyles.logo}
                 source={require('../assets/images/logo.png')}
               />
             </View>
-          <View style={styles.contentArea}>
-            <Text style={styles.signInAs}>Sign Up As...</Text>
+          <View style={homeStyles.contentArea}>
+            <Text style={homeStyles.signInAs}>Sign Up As...</Text>
             <Section>
               <Button
               onPress={this.onPressSignupAs.bind(this, userType.teacher)}
@@ -94,19 +101,19 @@ class Home extends Component {
               </Button>
             </Section>
           </View>
-          <View style={styles.LoginBox}>
-            <Text style={styles.LoginText}>Already have an account? </Text>
+          <View style={homeStyles.LoginBox}>
+            <Text style={homeStyles.LoginText}>Already have an account? </Text>
             <Section>
               <Button
-              style={styles.buttonLogin}
-              styleText={styles.buttonText}
+              style={homeStyles.buttonLogin}
+              styleText={homeStyles.buttonText}
               onPress={this.onPressLogin.bind(this)}
               >
                 Login
               </Button>
             </Section>
             <Section>
-              <Text style={styles.firebaseText}>Production:
+              <Text style={homeStyles.firebaseText}>Production:
                 <Switch
                   value={this.props.HomeReducer.firebaseToggle}
                   onValueChange={(val) => this.firebaseEnv(val)}

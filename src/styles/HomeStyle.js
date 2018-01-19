@@ -1,4 +1,4 @@
-export const styles = {
+export const homeStyles = {
   firebaseText: {
     fontSize: 20
   },

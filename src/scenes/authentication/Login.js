@@ -18,7 +18,6 @@ class Login extends Component {
     title: 'Login'
   };
 
-// input field data from redux
   onFieldChange(e, text) {
     const fieldInfo = {
       actionType: e.actionType,
@@ -26,13 +25,10 @@ class Login extends Component {
     };
     this.props.onFieldChangeAction(fieldInfo);
   }
-
-// click on login button will call loginAction
   LoginAction() {
     const payload = this.props.authenticationReducer;
     this.props.loginAction(payload); // call action
   }
-
   alertMessage() {
     if (this.props.authenticationReducer.success.status) {
       return (

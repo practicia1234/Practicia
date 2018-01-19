@@ -2,6 +2,7 @@ import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation'
 
 // Home scenes
 import Home from '../scenes/Home';
+import Splash from '../scenes/Splash';
 
 // Authentication scenes
 import Login from '../scenes/authentication/Login';
@@ -29,68 +30,72 @@ import Groups from '../scenes/students/groups';
 import UploadsScreen from '../scenes/upload/UploadsScreen';
 import Pending from '../scenes/students/pending';
 
+// Tasks
+import TaskList from '../scenes/task/TaskList';
+
 //import CustomDrawerContentComponent from './CustomDrawerContentComponent';
 
 
-// Constant for tab menus
-const submissionMenu = {
-  screen: TabNavigator({
-    All: { screen: AllPractice },
-    Practice: { screen: Practice },
-    PlayingTests: { screen: PlayingTests },
-    Questions: { screen: Questions }
-  }, {
-    tabBarPosition: 'top',
-    flex: 2 / 3,
-    tabBarOptions: {
-      activeTintColor: '#33ACDE',
-      labelStyle: {
-          fontSize: 12,
-            },
-      tabStyle: {
-        width: 50,
-                },
-    }
-  }
-  )
-};
-const studentMenu = {
-  screen: TabNavigator({
-    Individuals: { screen: Individuals },
-    Groups: { screen: Groups },
-    Pending: { screen: Pending }
-  }, {
-    tabBarPosition: 'top',
-    flex: 2 / 3,
-    tabBarOptions: {
-      activeTintColor: '#33ACDE',
-      labelStyle: {
-          fontSize: 12,
-            },
-      tabStyle: {
-        width: 50,
-                },
-    }
-  }
-  )
-};
-
-// Navigation defined
-const navigator = StackNavigator({
-  home: { screen: Home },
-  signup: { screen: DrawerNavigator(
-    {
-      addchild: { screen: AddChild,
-          navigationOptions: {
-            drawerLabel: 'Add new child'
-          },
-        },
-      selectTeachers: { screen: SelectTeachers },
-    },
-  ) },
+// Menu with out login
+const drawMenuWithOutLogin = DrawerNavigator({
+  home: { screen: Home,
+    navigationOptions: {
+      drawerLabel: 'Home'
+    } },
   login: { screen: Login },
+  addchild: { screen: AddChild,
+      navigationOptions: {
+        drawerLabel: 'Add new child'
+      },
+    },
   selectTeachers: { screen: SelectTeachers },
-  addchild: { screen: AddChild },
+});
+
+// Menu with login
+  // dashboard tab menu /// Constant for tab menus
+  const submissionMenu = {
+    screen: TabNavigator({
+      All: { screen: AllPractice },
+      Practice: { screen: Practice },
+      PlayingTests: { screen: PlayingTests },
+      Questions: { screen: Questions }
+    }, {
+      tabBarPosition: 'top',
+      flex: 2 / 3,
+      tabBarOptions: {
+        activeTintColor: '#33ACDE',
+        labelStyle: {
+            fontSize: 12,
+              },
+        tabStyle: {
+          width: 50,
+                  },
+      }
+    }
+    )
+  };
+  const studentMenu = {
+    screen: TabNavigator({
+      Individuals: { screen: Individuals },
+      Groups: { screen: Groups },
+      Pending: { screen: Pending }
+    }, {
+      tabBarPosition: 'top',
+      flex: 2 / 3,
+      tabBarOptions: {
+        activeTintColor: '#33ACDE',
+        labelStyle: {
+            fontSize: 12,
+              },
+        tabStyle: {
+          width: 50,
+                  },
+      }
+    }
+    )
+  };
+
+const drawMenuWithLogin = DrawerNavigator({
   dashboard: {
     screen: TabNavigator({
       Submissions: submissionMenu,
@@ -99,19 +104,32 @@ const navigator = StackNavigator({
       GameOn: { screen: GameOnScreen },
       Uploads: { screen: UploadsScreen }
     }, {
-      tabBarPosition: 'bottom',
-      tabBarOptions: {
-        activeTintColor: '#33ACDE',
-        labelStyle: {
-            fontSize: 12,
-              },
-        tabStyle: {
-          width: 50,
-                  }
-
+        tabBarPosition: 'bottom',
+        tabBarOptions: {
+          activeTintColor: '#33ACDE',
+          labelStyle: { fontSize: 12 },
+          tabStyle: { width: 50 }
+        }
       }
-    }),
-  }
+    ),
+    navigationOptions: {
+      drawerLabel: 'Dashboard'
+    }
+  },
+  taskList: { screen: TaskList,
+    navigationOptions: {
+      drawerLabel: 'Task List'
+    } },
+});
+
+// Navigation defined
+const navigator = StackNavigator({
+  splash: { screen: Splash },
+  home: { screen: drawMenuWithOutLogin }, // drawer menu
+  signup: { screen: SignUpStep },
+  selectTeachers: { screen: SelectTeachers },
+  addchild: { screen: AddChild },
+  dashboard: { screen: drawMenuWithLogin }  // drawer menu
 });
 
 export default navigator;

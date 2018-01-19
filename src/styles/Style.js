@@ -10,6 +10,11 @@ export const styles = {
   },
   screenView: {
     backgroundColor: 'white',
-    flex: 1 
+    flex: 1
+  },
+  navigationIcon: {
+      marginLeft: 10,
+      width: 35,
+      height: 30
   }
 };
